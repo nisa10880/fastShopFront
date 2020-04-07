@@ -40,7 +40,7 @@ if (localStorage.access_token) {
 
 // axios.defaults.baseURL = 'http://192.168.0.16:3001/';
 if (process.env.NODE_ENV === "development") {
-  axios.defaults.baseURL = "http://localhost:3001/";
+  axios.defaults.baseURL = "https://k82uw.sse.codesandbox.io/";
 }
 if (process.env.NODE_ENV === "production") {
   axios.defaults.baseURL = "https://letsgo-backend.herokuapp.com/";

@@ -1,11 +1,11 @@
-import ActionTypes from "../App/constants";
+import ActionTypes from "../../containers/App/constants";
 
 const initialState = {
   message: "",
   open: false
 };
 
-export const snackbarReducer = (state = initialState, action) => {
+const snackbarReducer = (state = initialState, action) => {
   switch (action.type) {
     case ActionTypes.SET_SNACKBAR_MESSAGE:
       return {
@@ -21,4 +21,5 @@ export const snackbarReducer = (state = initialState, action) => {
       return state;
   }
 };
+
 export default snackbarReducer;

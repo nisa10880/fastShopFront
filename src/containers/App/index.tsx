@@ -1,26 +1,27 @@
 import React from "react";
 import { Helmet } from "react-helmet";
 import { Switch, Route } from "react-router-dom";
+import * as Authaction from "../Login/actions";
 
-import EventList from "../EventList/EventList";
 import Login from "../Login/Login";
 
-import EventPage from "../EventPage/EventPage";
 import SignUp from "../SignUp/SignUp";
-import Profile from "../Profile/Profile";
-import EditProfile from "../Profile/EditProfile";
 
 import PrivateRoute from "./PrivateRoute";
 import ChangePassword from "../ChangePassword/ChangePassword";
 import ForgetPassword from "../ForgetPassword/ForgetPassword";
+
 import Bottom from "../../Components/BottomNavigation/BottomNavigation";
 
 import CustomAppBar from "../../Components/CustomAppBar/CustomAppBar";
 import { Snackbar } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
-import { closeSnackbar } from "../Snackbar/actions";
+import { closeSnackbar } from "../../Components/Snackbar/actions";
 
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { Button } from "@material-ui/core";
+
+import HomePage from "../HomePage/HomePage";
 
 const App = props => {
   const { snackbarState }: any =
@@ -82,58 +83,23 @@ const App = props => {
         {" "}
         <meta name="description" content="A React.js Boilerplate application" />
       </Helmet>
+      <Button
+        variant="text"
+        color="inherit"
+        style={{
+          height: 54
+        }}
+        onClick={() => dispatch(Authaction.logoutUser())}
+      >
+        Log out{" "}
+      </Button>
       <Switch>
         <ThemeProvider theme={theme}>
           <Route path="/login" component={Login} />
+          <Route path="/homepage" component={HomePage} />
           <Route path="/signup" component={SignUp} />
           <Route path="/forget-password" component={ForgetPassword} />
           <Route path="/change-password" component={ChangePassword} />
-          <PrivateRoute exact path="/search" component={EventList} />
-          <PrivateRoute exact path="/" component={Explore} />
-          <PrivateRoute path="/event/:id_event" component={EventPage} />
-          <PrivateRoute path="/profile" component={Profile} />
-          <PrivateRoute path="/edit-profile" component={EditProfile} />
-          <PrivateRoute path="/add-address" component={AddNewAddress} />
-          <PrivateRoute
-            path="/edit-address/:idAddress"
-            component={EditAddress}
-          />
-          <PrivateRoute path="/manage-address" component={ManageAddress} />
-          <PrivateRoute
-            path="/attribute-address"
-            component={AttributeAddress}
-          />
-          <PrivateRoute path="/map" component={MapContainer} />
-          <PrivateRoute
-            path="/become-organiser/1"
-            component={BecomeOrganizerStepOne}
-          />
-          <PrivateRoute
-            path="/become-organiser/2"
-            component={BecomeOrganizerStepTwo}
-          />
-          <PrivateRoute
-            path="/become-organiser/3"
-            component={BecomeOrganizerStepThree}
-          />
-          <PrivateRoute
-            path="/become-organiser/4"
-            component={BecomeOrganizerStepFour}
-          />
-          <PrivateRoute path="/add-event" component={AddEvent} />
-          <PrivateRoute path="/participate/:id_event" component={Participate} />
-          <PrivateRoute path="/opinion/:id_event" component={AddOpinion} />
-          <PrivateRoute path="/manage-events" component={ManageEvents} />
-          <PrivateRoute path="/message" component={Message} />
-          <PrivateRoute
-            path="/participant-respond"
-            component={ParticipateRespond}
-          />
-          <PrivateRoute
-            path="/public-profile/:profile_id"
-            component={PublicProfile}
-          />
-          <PrivateRoute path="/setting" component={Setting} />
           <Bottom />
         </ThemeProvider>
       </Switch>

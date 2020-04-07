@@ -7,10 +7,12 @@ import { connectRouter } from "connected-react-router";
 
 import history from "./utils/history";
 import globalReducer from "./containers/App/reducer";
-//import languageProviderReducer from './containers/LanguageProvider/reducer';
+
+import snackbarReducer from "./Components/Snackbar/reducer";
 
 import loginReducer from "./containers/Login/reducer";
-import snackbarReducer from "./Components/Snackbar/snackbarReducer";
+
+import productListReducer from "./containers/HomePage/reducer";
 
 /**
  * Merges the main reducer with the router state and dynamically injected reducers
@@ -18,9 +20,9 @@ import snackbarReducer from "./Components/Snackbar/snackbarReducer";
 export default function createReducer(injectedReducers = {}) {
   const rootReducer = combineReducers({
     global: globalReducer,
-    //language: languageProviderReducer,
     user: loginReducer,
     snackbarReducer: snackbarReducer,
+    productListReducer: productListReducer,
     router: connectRouter(history),
     ...injectedReducers
   });
