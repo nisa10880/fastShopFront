@@ -1,2 +1,0 @@
-# fastShopFront
-Created with CodeSandbox
