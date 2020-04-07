@@ -6,7 +6,6 @@ import {
   Button,
   IconButton,
   InputAdornment,
-  OutlinedInput,
   MobileStepper,
   Typography
 } from "@material-ui/core";

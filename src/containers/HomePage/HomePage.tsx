@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import * as action from "./actions";
 import ProductCard from "./ProductCard";
 import { useSelector, useDispatch } from "react-redux";
+import SearchBar from '../../Components/SearchBar/SearchBar'
 
 const HomePage = props => {
   const { products, productsCount, loaded }: any = useSelector(state => ({
@@ -28,6 +29,7 @@ const HomePage = props => {
 
   return (
     <>
+    <SearchBar/>
       {products.map(product => (
         <ProductCard
           name={product.name}

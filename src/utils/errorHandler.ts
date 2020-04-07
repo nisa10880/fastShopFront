@@ -1,7 +1,10 @@
 import { setSnackbarMessage } from "../Components/Snackbar/actions";
 
 const errorHandler = (dispatch, error) => {
-  console.log(error.response.data);
+  if (!error.response) {
+    return dispatch(setSnackbarMessage("server error"));
+  }
+
   if (Array.isArray(error.response.data.message)) {
     dispatch(
       setSnackbarMessage(
@@ -11,6 +14,7 @@ const errorHandler = (dispatch, error) => {
   } else {
     dispatch(setSnackbarMessage(JSON.stringify(error.response.data.message)));
   }
+  console.log(error.response.data);
 };
 
 export default errorHandler;

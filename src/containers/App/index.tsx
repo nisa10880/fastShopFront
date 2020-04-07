@@ -14,14 +14,13 @@ import ForgetPassword from "../ForgetPassword/ForgetPassword";
 import Bottom from "../../Components/BottomNavigation/BottomNavigation";
 
 import CustomAppBar from "../../Components/CustomAppBar/CustomAppBar";
-import { Snackbar } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
-import { closeSnackbar } from "../../Components/Snackbar/actions";
 
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
 
 import HomePage from "../HomePage/HomePage";
+import CustomSnackbar from "../../Components/Snackbar/Snackbar";
 
 const App = props => {
   const { snackbarState }: any =
@@ -67,18 +66,10 @@ const App = props => {
   return (
     <div>
       <CustomAppBar />
-      <Snackbar
-        anchorOrigin={{
-          vertical: "top",
-          horizontal: "right"
-        }}
-        style={{ marginTop: 64 }}
+      <CustomSnackbar
         open={snackbarState.open}
         message={snackbarState.message}
-        autoHideDuration={3000}
-        onClose={() => dispatch(closeSnackbar())}
       />
-
       <Helmet titleTemplate="Timelapps" defaultTitle="Timelapps">
         {" "}
         <meta name="description" content="A React.js Boilerplate application" />
@@ -96,7 +87,7 @@ const App = props => {
       <Switch>
         <ThemeProvider theme={theme}>
           <Route path="/login" component={Login} />
-          <Route exact path="/" component={HomePage} />
+          <PrivateRoute exact path="/" component={HomePage} />
           <Route path="/signup" component={SignUp} />
           <Route path="/forget-password" component={ForgetPassword} />
           <Route path="/change-password" component={ChangePassword} />
