@@ -96,11 +96,11 @@ const App = props => {
       <Switch>
         <ThemeProvider theme={theme}>
           <Route path="/login" component={Login} />
-          <Route path="/homepage" component={HomePage} />
+          <Route exact path="/" component={HomePage} />
           <Route path="/signup" component={SignUp} />
           <Route path="/forget-password" component={ForgetPassword} />
           <Route path="/change-password" component={ChangePassword} />
-          <Bottom />
+          {/* <Bottom /> */}
         </ThemeProvider>
       </Switch>
       <div />
