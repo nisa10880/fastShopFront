@@ -2,12 +2,23 @@
   "name": "react-ts",
   "version": "1.0.0",
   "description": "React and TypeScript example starter project",
-  "keywords": ["typescript", "react", "starter"],
+  "keywords": [
+    "typescript",
+    "react",
+    "starter"
+  ],
   "main": "src/index.tsx",
   "dependencies": {
+    "axios": "0.19.2",
+    "connected-react-router": "6.8.0",
+    "jwt-decode": "2.2.0",
     "react": "^16.12.0",
+    "react-app-polyfill": "1.0.6",
     "react-dom": "^16.12.0",
-    "react-scripts": "3.3.0"
+    "react-redux": "7.2.0",
+    "react-router": "5.1.2",
+    "react-scripts": "3.3.0",
+    "redux": "4.0.5"
   },
   "devDependencies": {
     "@types/react": "16.9.19",
@@ -20,5 +31,10 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "browserslist": [">0.2%", "not dead", "not ie <= 11", "not op_mini all"]
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
