@@ -9,8 +9,7 @@ const HomePage = props => {
   const { products, productsCount, loaded }: any = useSelector(state => ({
     products: state.productListReducer.products,
     productsCount: state.productListReducer.productsCount,
-    loaded: state.productListReducer.loaded,
-    ProductInBasket: state.productListReducer.ProductInBasket
+    loaded: state.productListReducer.loaded
   }));
 
   const dispatch = useDispatch();
@@ -34,22 +33,10 @@ const HomePage = props => {
       <SearchBar />
       {products.map(product => (
         <ProductCard
-          key={product.id_product}
           name={product.name}
-          measure_type={product.measure_type}
-          description={product.description.substring(0, 80) + "..."}
+          description={product.description.substring(0, 120) + "..."}
           picture={product.picture}
           price={product.price}
-          onClick={() =>
-            dispatch(
-              action.addProductToBasket({
-                id_product: product.id_product,
-                name: product.name,
-                measure_type: product.measure_type,
-                price: product.price
-              })
-            )
-          }
         />
       ))}
     </>

@@ -9,7 +9,6 @@ import {
 } from "@material-ui/core";
 import * as action from "./actions";
 import * as globalAction from "../App/actions";
-import "./Login.css";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import TwitterIcon from "@material-ui/icons/Twitter";
 import MailIcon from "@material-ui/icons/Mail";

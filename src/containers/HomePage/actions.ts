@@ -21,3 +21,10 @@ export const setProducts = (data, countEvent) => {
     countEvent: countEvent
   };
 };
+
+export const addProductToBasket = data => {
+  return {
+    type: ActionTypes.ADD_PRODUCT_TO_BASKET,
+    payload: data
+  };
+};

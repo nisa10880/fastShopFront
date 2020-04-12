@@ -1,58 +1,68 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import CardActions from "@material-ui/core/CardActions";
+import Button from "@material-ui/core/Button";
+import { Divider, makeStyles } from "@material-ui/core";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardMedia from "@material-ui/core/CardMedia";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   root: {
-    maxWidth: 345
+    borderRadius: 16,
+    minWidth: 300,
+    maxWidth: 300,
+    textAlign: "center"
+  },
+  header: {
+    textAlign: "center"
+  },
+
+  button: {
+    margin: theme.spacing(1)
+  },
+  action: {
+    display: "flex",
+    justifyContent: "space-around"
   }
-});
+}));
 
-interface Props {
-  picture?: string;
-  name?: string;
-  description?: string;
-  price?: number;
-}
-
-const ImgMediaCard = (props: Props) => {
+const ProductCard = props => {
   const classes = useStyles();
-
   return (
     <Card className={classes.root}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          alt="Contemplative Reptile"
-          height="140"
-          image={props.picture}
-          title="Contemplative Reptile"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {props.name}
-          </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {props.description}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          {props.price} €
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
+      <CardMedia
+        component="img"
+        alt="Contemplative Reptile"
+        height="140"
+        image={props.picture}
+        title="Contemplative Reptile"
+      />
+      <CardHeader title={props.name} className={classes.header} />
+      <Divider variant="middle" />
+      <CardContent>
+        <div>
+          <Typography align="left">{props.description}</Typography>
+        </div>
+      </CardContent>
+      <Divider variant="middle" />
+      <CardActions className={classes.action}>
+        <Typography variant="h5" align="center">
+          {props.price}€
+          {props.measure_type === "piece" ? null : "/" + props.measure_type}
+        </Typography>
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={props.onClick}
+        >
+          AJOUTER AU PANIER
         </Button>
       </CardActions>
     </Card>
   );
 };
 
-export default ImgMediaCard;
+export default ProductCard;

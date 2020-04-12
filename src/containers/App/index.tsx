@@ -21,6 +21,7 @@ import { Button } from "@material-ui/core";
 
 import HomePage from "../HomePage/HomePage";
 import CustomSnackbar from "../../Components/Snackbar/Snackbar";
+import MenuAppBar from "../../Components/AppBar/AppBar";
 
 const App = props => {
   const { snackbarState }: any =
@@ -65,7 +66,7 @@ const App = props => {
   const dispatch = useDispatch();
   return (
     <div>
-      <CustomAppBar />
+      <MenuAppBar />
       <CustomSnackbar
         open={snackbarState.open}
         message={snackbarState.message}
@@ -87,7 +88,7 @@ const App = props => {
       <Switch>
         <ThemeProvider theme={theme}>
           <Route path="/login" component={Login} />
-          <PrivateRoute exact path="/" component={HomePage} />
+          <Route exact path="/" component={HomePage} />
           <Route path="/signup" component={SignUp} />
           <Route path="/forget-password" component={ForgetPassword} />
           <Route path="/change-password" component={ChangePassword} />
