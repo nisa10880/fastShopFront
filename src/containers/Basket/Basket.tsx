@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Grid,
   withStyles,
@@ -90,20 +90,27 @@ const Basket = props => {
 
   const dispatch = useDispatch();
 
+  let order_amount = 0;
+  for (const product of productInBasket) {
+    order_amount =
+      order_amount + parseInt(product.price) * parseInt(product.quantity);
+  }
+
   const formik = useFormik({
     initialValues: {
       first_name: "",
       last_name: "",
-      order_date: new Date(),
+      order_date: Date(),
       mail: "",
-      imgUrl: "",
-      phone_number: 0
+      phone_number: 0,
+      products: [],
+      order_amount: 0
     },
-    validate,
-    enableReinitialize: true,
     onSubmit: async (values, actions) => {
       try {
-        await dispatch(action.sendSignUp(values));
+        values.products = productInBasket;
+        values.order_amount = order_amount;
+        await dispatch(action.sendOrder(values));
         setCurrentStep(currentStep + 1);
       } catch {}
     }
@@ -163,7 +170,7 @@ const Basket = props => {
                 </>
               ))}{" "}
             </Paper>
-
+            <Typography variant="h3"> total {order_amount} €</Typography>
             <Input
               onChange={formik.handleChange}
               value={formik.values.first_name}
@@ -182,7 +189,6 @@ const Basket = props => {
               variant="outlined"
               required
             />
-
             <Input
               onChange={formik.handleChange}
               type="text"
@@ -192,7 +198,6 @@ const Basket = props => {
               variant="outlined"
               required
             />
-
             <Input
               onChange={formik.handleChange}
               value={formik.values.phone_number}
@@ -202,7 +207,6 @@ const Basket = props => {
               variant="outlined"
               required
             />
-
             <TextField
               onChange={formik.handleChange}
               id="datetime-local-begin_at"
@@ -214,6 +218,15 @@ const Basket = props => {
                 shrink: true
               }}
             />
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              className="submit-btn"
+              style={{ borderRadius: 100, marginTop: 40 }}
+            >
+              Commander
+            </Button>
           </>
         ) : null}
 
@@ -233,7 +246,10 @@ const Basket = props => {
         ) : null}
       </form>
 
-      <form onSubmit={} style={{ marginBottom: 100, display: "contents" }}>
+      <form
+        onSubmit={() => null}
+        style={{ marginBottom: 100, display: "contents" }}
+      >
         {currentStep === 2 ? (
           <>
             <Button
@@ -249,7 +265,7 @@ const Basket = props => {
         ) : null}
       </form>
 
-      <MobileStepper
+      {/*      <MobileStepper
         variant="dots"
         steps={3}
         position="static"
@@ -267,7 +283,7 @@ const Basket = props => {
             Back
           </Button>
         }
-      />
+      /> */}
     </Grid>
   );
 };

@@ -27,6 +27,18 @@ const HomePage = props => {
     setState({ ...state, [name]: event.target.value });
   };
 
+  const handleKeyDown = e => {
+    if (e.key === "Enter") {
+      dispatch(action.searchProducts({ ...state, skip: 0 }));
+    }
+  };
+
+  useEffect(() => {
+    if (loaded) {
+      dispatch(action.searchProducts({ ...state, skip: 0 }));
+    }
+  }, [state.search]);
+
   useEffect(() => {
     if (!loaded) {
       dispatch(action.searchProducts({ ...state, skip: 0 }));
@@ -35,7 +47,11 @@ const HomePage = props => {
 
   return (
     <>
-      <SearchBar />
+      <SearchBar
+        search={state.search}
+        handleInputChange={handleChange("search")}
+        handleKeyDown={handleKeyDown}
+      />
       <Box display="flex" flexWrap="wrap" alignContent="flex-start" m={2}>
         {products.map(product => (
           <Box m={2}>

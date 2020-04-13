@@ -57,6 +57,7 @@ export default function MenuAppBar() {
           className={classes.menuButton}
           color="inherit"
           aria-label="menu"
+          onClick={() => dispatch(push("/"))}
         >
           <MenuIcon />
         </IconButton>
