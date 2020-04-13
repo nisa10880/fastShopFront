@@ -3,14 +3,13 @@ import * as action from "./actions";
 import ProductCard from "./ProductCard";
 import { useSelector, useDispatch } from "react-redux";
 import SearchBar from "../../Components/SearchBar/SearchBar";
-import MenuAppBar from "../../Components/AppBar/AppBar";
+import Box from "@material-ui/core/Box";
 
 const HomePage = props => {
   const { products, productsCount, loaded }: any = useSelector(state => ({
     products: state.productListReducer.products,
     productsCount: state.productListReducer.productsCount,
-    loaded: state.productListReducer.loaded,
-    ProductInBasket: state.productListReducer.ProductInBasket
+    loaded: state.productListReducer.loaded
   }));
 
   const dispatch = useDispatch();
@@ -20,8 +19,13 @@ const HomePage = props => {
     take: 10,
     skip: 0,
     order: "price",
-    price: 250
+    price: 250,
+    quantity: 0
   });
+
+  const handleChange = name => event => {
+    setState({ ...state, [name]: event.target.value });
+  };
 
   useEffect(() => {
     if (!loaded) {
@@ -32,26 +36,34 @@ const HomePage = props => {
   return (
     <>
       <SearchBar />
-      {products.map(product => (
-        <ProductCard
-          key={product.id_product}
-          name={product.name}
-          measure_type={product.measure_type}
-          description={product.description.substring(0, 80) + "..."}
-          picture={product.picture}
-          price={product.price}
-          onClick={() =>
-            dispatch(
-              action.addProductToBasket({
-                id_product: product.id_product,
-                name: product.name,
-                measure_type: product.measure_type,
-                price: product.price
-              })
-            )
-          }
-        />
-      ))}
+      <Box display="flex" flexWrap="wrap" alignContent="flex-start" m={2}>
+        {products.map(product => (
+          <Box m={2}>
+            <ProductCard
+              key={product.id_product}
+              name={product.name}
+              measure_type={product.measure_type}
+              description={product.description.substring(0, 80) + "..."}
+              picture={product.picture}
+              onQuantityChange={handleChange("quantity")}
+              quantity={state.quantity}
+              price={product.price}
+              onSubmit={() =>
+                dispatch(
+                  action.addProductToBasket({
+                    id_product: product.id_product,
+                    name: product.name,
+                    picture: product.picture,
+                    quantity: state.quantity,
+                    measure_type: product.measure_type,
+                    price: product.price
+                  })
+                )
+              }
+            />
+          </Box>
+        ))}
+      </Box>
     </>
   );
 };

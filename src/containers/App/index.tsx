@@ -10,6 +10,7 @@ import SignUp from "../SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import ChangePassword from "../ChangePassword/ChangePassword";
 import ForgetPassword from "../ForgetPassword/ForgetPassword";
+import Basket from "../Basket/Basket";
 
 import Bottom from "../../Components/BottomNavigation/BottomNavigation";
 
@@ -89,6 +90,7 @@ const App = props => {
         <ThemeProvider theme={theme}>
           <Route path="/login" component={Login} />
           <Route exact path="/" component={HomePage} />
+          <Route exact path="/basket" component={Basket} />
           <Route path="/signup" component={SignUp} />
           <Route path="/forget-password" component={ForgetPassword} />
           <Route path="/change-password" component={ChangePassword} />

@@ -11,6 +11,10 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import FormGroup from "@material-ui/core/FormGroup";
 import MenuItem from "@material-ui/core/MenuItem";
 import Menu from "@material-ui/core/Menu";
+import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
+import Badge from "@material-ui/core/Badge";
+import { useSelector, useDispatch } from "react-redux";
+import { push } from "connected-react-router";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -27,6 +31,12 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function MenuAppBar() {
+  const { productInBasket }: any = useSelector(state => ({
+    productInBasket: state.productListReducer.productInBasket.length
+  }));
+
+  const dispatch = useDispatch();
+
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
@@ -63,6 +73,18 @@ export default function MenuAppBar() {
           >
             <AccountCircle />
           </IconButton>
+          <IconButton
+            aria-label="account of current user"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            color="inherit"
+            onClick={() => dispatch(push("/basket"))}
+          >
+            <Badge badgeContent={productInBasket} color="secondary">
+              <ShoppingCartIcon />
+            </Badge>
+          </IconButton>
+
           <Menu
             id="menu-appbar"
             anchorEl={anchorEl}

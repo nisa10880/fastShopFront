@@ -7,6 +7,8 @@ import Button from "@material-ui/core/Button";
 import { Divider, makeStyles } from "@material-ui/core";
 import CardHeader from "@material-ui/core/CardHeader";
 import CardMedia from "@material-ui/core/CardMedia";
+import Modal from "../../Components/Modal/Modal";
+import Box from "@material-ui/core/Box";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -52,14 +54,25 @@ const ProductCard = props => {
           {props.price}€
           {props.measure_type === "piece" ? null : "/" + props.measure_type}
         </Typography>
-        <Button
-          variant="contained"
-          color="primary"
-          className={classes.button}
-          onClick={props.onClick}
+        <Modal
+          quantity={props.quantity}
+          onQuantityChange={props.onQuantityChange}
+          onSubmit={props.onSubmit}
+          picture={props.picture}
+          name={props.name}
+          price={props.price}
+          description={props.description}
+          measure_type={props.measure_type}
         >
-          AJOUTER AU PANIER
-        </Button>
+          {" "}
+          <Button
+            variant="contained"
+            color="primary"
+            className={classes.button}
+          >
+            AJOUTER AU PANIER
+          </Button>
+        </Modal>
       </CardActions>
     </Card>
   );
